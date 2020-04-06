@@ -3,9 +3,12 @@ package it.polito.tdp.anagrammi.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polito.tdp.anagrammi.DAO.AnagrammaDAO;
+
 public class Ricerca {
 	
 	private List<String> soluzione ;
+	AnagrammaDAO adao = new AnagrammaDAO();
 
 	/**
 	 * Genera tutti gli anagrammi della parola specificata in ingresso.
@@ -57,6 +60,15 @@ public class Ricerca {
 			
 			cerca( tentativo, livello+1, rimanenti) ;
 		}
+	}
+	
+	
+	public List<String> getTutteLeParole() {
+		return adao.getTutteLeParole();
+	}
+	
+	public boolean isCorrect (String anagramma) {
+		return adao.isCorrect(anagramma);
 	}
 
 }

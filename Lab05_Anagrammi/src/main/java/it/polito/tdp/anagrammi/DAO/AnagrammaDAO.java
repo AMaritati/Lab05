@@ -47,5 +47,39 @@ public class AnagrammaDAO {
 		}
 	}
 	
+	public boolean isCorrect (String anagramma) {
+		boolean flag = false;
+		final String sql = "SELECT * FROM parola where nome = ?";
+
+		//List<String> parole = new LinkedList<String>();
+
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+
+			st.setString(1, anagramma);
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+
+				int cod = rs.getInt("id");
+				String nome = rs.getString("nome");
+				if (nome.toLowerCase().equals(anagramma.toLowerCase()))
+					flag=true;
+				
+			}
+
+			
+			conn.close();
+			
+			return flag;
+			
+
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			throw new RuntimeException("Errore Db", e);
+		}
+		
+	}
 
 }

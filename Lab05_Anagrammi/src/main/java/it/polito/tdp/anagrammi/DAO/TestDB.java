@@ -6,7 +6,8 @@ public class TestDB {
 		// TODO Auto-generated method stub
 		
 		AnagrammaDAO aDAO = new AnagrammaDAO();
-		System.out.println(aDAO.getTutteLeParole());
+		System.out.println(aDAO.isCorrect("z"));
+		
 
 	}
 

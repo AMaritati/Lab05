@@ -1,7 +1,10 @@
 package it.polito.tdp.anagrammi;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import it.polito.tdp.anagrammi.model.Ricerca;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +12,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class FXMLController {
+	
+	private Ricerca ricerca;
 
     @FXML
     private ResourceBundle resources;
@@ -33,12 +38,27 @@ public class FXMLController {
 
     @FXML
     void doAnagramma(ActionEvent event) {
+     
+    	String parola = txtParola.getText();
+    	List<String> parole = this.ricerca.anagrammi(parola);
+    	
+    	for (String a : parole) {
+			if(this.ricerca.isCorrect(a)) {
+				txtOK.appendText(a+"\n");
+			}
+			else {
+				txtNOT.appendText(a+"\n");
+			}
+		}
 
     }
 
     @FXML
     void doReset(ActionEvent event) {
 
+    	txtParola.clear();
+    	txtOK.clear();
+    	txtNOT.clear();
     }
 
     @FXML
@@ -48,6 +68,12 @@ public class FXMLController {
         assert txtOK != null : "fx:id=\"txtOK\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtNOT != null : "fx:id=\"txtNOT\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnReset != null : "fx:id=\"btnReset\" was not injected: check your FXML file 'Scene.fxml'.";
+        
+        ricerca = new Ricerca();
 
     }
+    
+    public void setRicerca(Ricerca ricerca) {
+    	this.ricerca=ricerca;
+    	}
 }
