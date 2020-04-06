@@ -6,7 +6,7 @@ public class TestDB {
 		// TODO Auto-generated method stub
 		
 		AnagrammaDAO aDAO = new AnagrammaDAO();
-		System.out.println();
+		System.out.println(aDAO.getTutteLeParole());
 
 	}
 
