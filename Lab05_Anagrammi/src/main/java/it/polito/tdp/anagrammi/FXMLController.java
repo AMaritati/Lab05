@@ -1,6 +1,7 @@
 package it.polito.tdp.anagrammi;
 
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -56,17 +57,27 @@ public class FXMLController {
     	//effettuo il metodo anagrammi
     	List<String> parole = this.ricerca.anagrammi(parola);
     	
+    	List<String> ok = new LinkedList<String>();
+    	List<String> not = new LinkedList<String>();
     	// in questo modo studio se sono corrette o meno e stampo
     	//voglio provare però a inserire le stringhe in una lista per non stampare quelle già presenti
     	
     	for (String a : parole) {
 			if(this.ricerca.isCorrect(a)) {
-				txtOK.appendText(a+"\n");
+			
+				if(!ok.contains(a))
+				ok.add(a);
+				//txtOK.appendText(a+"\n");
 			}
 			else {
-				txtNOT.appendText(a+"\n");
+				if (!not.contains(a))
+				not.add(a);
+				//txtNOT.appendText(a+"\n");
 			}
 		}
+
+    	txtOK.setText(ok.toString());
+    	txtNOT.setText(not.toString());
 
     }
 
