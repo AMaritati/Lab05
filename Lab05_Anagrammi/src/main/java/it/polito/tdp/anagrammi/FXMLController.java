@@ -38,9 +38,26 @@ public class FXMLController {
 
     @FXML
     void doAnagramma(ActionEvent event) {
+    	//pulisco il campo di lavoro per non "sommare" le parole
+    	txtOK.clear();
+    	txtNOT.clear();
      
+    	//leggo la parola
     	String parola = txtParola.getText();
+    	
+    	//CONTROLLO INSERIMENTO PAROLA
+    	
+    	if (!this.ricerca.controllaParola(parola)) {
+    		txtOK.setText("NON HAI INSERITO UNA PAROLA");
+    		txtParola.clear();
+    		return;
+    	}
+    	
+    	//effettuo il metodo anagrammi
     	List<String> parole = this.ricerca.anagrammi(parola);
+    	
+    	// in questo modo studio se sono corrette o meno e stampo
+    	//voglio provare però a inserire le stringhe in una lista per non stampare quelle già presenti
     	
     	for (String a : parole) {
 			if(this.ricerca.isCorrect(a)) {
